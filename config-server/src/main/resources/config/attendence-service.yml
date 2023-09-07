@@ -1,9 +1,9 @@
 server:
-  port: 7020
+  port: 8013
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/medstocks
+    url: jdbc:postgresql://localhost:5432/smattendence
     username: postgres
     password: pass
   jpa:

@@ -1,9 +1,9 @@
 server:
-  port: 7015
+  port: 8014
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/extracharges
+    url: jdbc:postgresql://localhost:5432/smenrollment
     username: postgres
     password: pass
   jpa:

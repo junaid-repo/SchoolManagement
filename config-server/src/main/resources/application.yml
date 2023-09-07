@@ -1,5 +1,5 @@
 server:
-  port: 7088
+  port: 8088
 
 spring:
   profiles:
