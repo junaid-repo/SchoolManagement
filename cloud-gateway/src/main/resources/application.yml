@@ -1,0 +1,66 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: API-GATEWAY
+
+
+  cloud:
+    gateway:
+      routes:
+        - id: STOCK-SERVICE
+          uri: lb://STOCK-SERVICE
+          predicates:
+            - Path=/bs/stocks/**
+          filters:
+           - AuthenticationFilter  
+            
+        - id: EMPLOYEE-SERVICE
+          uri: lb://EMPLOYEE-SERVICE
+          predicates:
+            - Path=/bs/employee/**
+          filters:
+           - AuthenticationFilter
+           
+        - id: ACCOUNTS-SERVICE
+          uri: lb://ACCOUNTS-SERVICE
+          predicates:
+            - Path=/bs/accounts/**
+          filters:
+           - AuthenticationFilter
+            
+        - id: EXTRACHARGES-SERVICE
+          uri: lb://EXTRACHARGES-SERVICE
+          predicates:
+            - Path=/bs/charges/**
+          filters:
+           - AuthenticationFilter
+           
+        - id: CUSTOMER-SERVICE
+          uri: lb://CUSTOMER-SERVICE
+          predicates:
+            - Path=/bs/customer/**
+          filters:
+           - AuthenticationFilter
+           
+        - id: MEDSTOCKS-SERVICE
+          uri: lb://MEDSTOCKS-SERVICE
+          predicates:
+            - Path=/bs/medStocks/**
+          filters:
+           - AuthenticationFilter 
+           
+        - id: API-GATEWAY
+          uri: lb://API-GATEWAY
+          predicates:
+            - Path=/bs/employee/**
+          filters:
+           - AuthenticationFilter                           
+           
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
