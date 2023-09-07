@@ -1,22 +1,20 @@
-package com.billing.app.employees.config;
-
+package com.management.school.smusers.config;
 
 import java.util.Optional;
 
+import com.management.school.smusers.entities.UserCredential;
+import com.management.school.smusers.repositories.UserSaveRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import com.billing.app.employees.entities.UserCredential;
-import com.billing.app.employees.repository.UserRegisterRepository;
-
 @Component
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UserRegisterRepository repository;
+    private UserSaveRepository repository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

@@ -1,11 +1,11 @@
-package com.billing.app.employees.config;
+package com.management.school.smusers.config;
 
 import java.util.Collection;
 
+import com.management.school.smusers.entities.UserCredential;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.billing.app.employees.entities.UserCredential;
 
 public class CustomUserDetails implements UserDetails {
 
