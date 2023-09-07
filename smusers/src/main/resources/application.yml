@@ -1,6 +1,5 @@
 spring:
   application:
-    name: SMUSERS-SERVICE
+    name: smusers-service
   config:
-    import: "optional:configserver:http://localhost:8088"
-
+    import: "optional:configserver:http://localhost:7088"

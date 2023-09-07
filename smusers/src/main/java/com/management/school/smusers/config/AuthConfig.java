@@ -1,4 +1,4 @@
-package com.billing.app.employees.config;
+package com.management.school.smusers.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +19,7 @@ public class AuthConfig {
 	
 	@Bean
 	public UserDetailsService userDetailsService() {
-		return new com.billing.app.employees.config.CustomUserDetailsService();
+		return new CustomUserDetailsService();
 	}
 	
 	@Bean
@@ -31,7 +31,7 @@ public class AuthConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 		return http.csrf().disable()
 		.authorizeHttpRequests()
-		.requestMatchers("/bs/employee/**").permitAll()
+		.requestMatchers("/sm/user/auth/**").permitAll()
 		.and()
 		.build();
 		
