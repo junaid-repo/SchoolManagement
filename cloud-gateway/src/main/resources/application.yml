@@ -8,31 +8,31 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: STOCK-SERVICE
-          uri: lb://STOCK-SERVICE
+        - id: ATTENDENCE-SERVICE
+          uri: lb://ATTENDENCE-SERVICE
           predicates:
-            - Path=/bs/stocks/**
+            - Path=/sm/attendence/**
           filters:
            - AuthenticationFilter  
             
-        - id: EMPLOYEE-SERVICE
-          uri: lb://EMPLOYEE-SERVICE
+        - id: SMSUSERS-SERVICE
+          uri: lb://SMSUSERS-SERVICE
           predicates:
-            - Path=/bs/employee/**
+            - Path=/sm/user/**
           filters:
            - AuthenticationFilter
            
-        - id: ACCOUNTS-SERVICE
-          uri: lb://ACCOUNTS-SERVICE
+        - id: ENROLLMENT-SERVICE
+          uri: lb://ENROLLMENT-SERVICE
           predicates:
-            - Path=/bs/accounts/**
+            - Path=/ms/enrollment/**
           filters:
            - AuthenticationFilter
             
-        - id: EXTRACHARGES-SERVICE
-          uri: lb://EXTRACHARGES-SERVICE
+        - id: EXAMS-SERVICE
+          uri: lb://EXAMS-SERVICE
           predicates:
-            - Path=/bs/charges/**
+            - Path=/ms/exams/**
           filters:
            - AuthenticationFilter
            
@@ -42,13 +42,6 @@ spring:
             - Path=/bs/customer/**
           filters:
            - AuthenticationFilter
-           
-        - id: MEDSTOCKS-SERVICE
-          uri: lb://MEDSTOCKS-SERVICE
-          predicates:
-            - Path=/bs/medStocks/**
-          filters:
-           - AuthenticationFilter 
            
         - id: API-GATEWAY
           uri: lb://API-GATEWAY
