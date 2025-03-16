@@ -33,6 +33,15 @@ spring:
           uri: lb://STUDENTS-SERVICE
           predicates:
             - Path=/sm/students/**
+          filters:
+            - AuthenticationFilter
+            
+        - id: PERFORMANCE-SERVICE
+          uri: lb://PERFORMANCE-SERVICE
+          predicates:
+            - Path=/sm/performance/**
+          filters:
+            - AuthenticationFilter         
             
         - id: TEACHER-SERVICE
           uri: lb://TEACHER-SERVICE
