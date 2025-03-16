@@ -1,6 +1,0 @@
-spring:
-  application:
-    name: ACCOUNTS-SERVICE
-  config:
-    import: "optional:configserver:http://localhost:8088"
-

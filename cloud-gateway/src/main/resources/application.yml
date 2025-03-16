@@ -5,51 +5,44 @@ spring:
     name: API-GATEWAY
 
 
+
   cloud:
     gateway:
       routes:
-        - id: ATTENDENCE-SERVICE
-          uri: lb://ATTENDENCE-SERVICE
+        - id: COURSE-SERVICE
+          uri: lb://COURSE-SERVICE
           predicates:
-            - Path=/sm/attendence/**
-          filters:
-           - AuthenticationFilter  
+            - Path=/sm/course/**
+
+        - id: FEE-SERVICE
+          uri: lb://FEE-SERVICE
+          predicates:
+            - Path=/sm/fee/**
             
-        - id: SMSUSERS-SERVICE
-          uri: lb://SMSUSERS-SERVICE
+        - id: NOTIFICATION-SERVICE
+          uri: lb://NOTIFICATION-SERVICE
           predicates:
-            - Path=/sm/user/**
-          filters:
-           - AuthenticationFilter
-           
-        - id: ENROLLMENT-SERVICE
-          uri: lb://ENROLLMENT-SERVICE
+            - Path=/sm/notify/**
+
+        - id: SCHEDULER-SERVICE
+          uri: lb://SCHEDULER-SERVICE
           predicates:
-            - Path=/ms/enrollment/**
-          filters:
-           - AuthenticationFilter
+            - Path=/sm/schedule/**
+
+        - id: STUDENTS-SERVICE
+          uri: lb://STUDENTS-SERVICE
+          predicates:
+            - Path=/sm/students/**
             
-        - id: EXAMS-SERVICE
-          uri: lb://EXAMS-SERVICE
+        - id: TEACHER-SERVICE
+          uri: lb://TEACHER-SERVICE
           predicates:
-            - Path=/ms/exams/**
-          filters:
-           - AuthenticationFilter
-           
-        - id: CUSTOMER-SERVICE
-          uri: lb://CUSTOMER-SERVICE
+            - Path=/sm/teacher/**
+
+        - id: USER-SERVICE
+          uri: lb://USER-SERVICE
           predicates:
-            - Path=/bs/customer/**
-          filters:
-           - AuthenticationFilter
-           
-        - id: API-GATEWAY
-          uri: lb://API-GATEWAY
-          predicates:
-            - Path=/bs/employee/**
-          filters:
-           - AuthenticationFilter                           
-           
+            - Path=/auth/**
 
 eureka:
   client:
