@@ -39,7 +39,7 @@ public class StudentDetails {
 	    @Size(max = 50, message = "Last name must not exceed 50 characters")
 	    private String lastName;
 
-	    @NotBlank(message = "Date of birth is required")
+	   // @NotBlank(message = "Date of birth is required")
 	    @Past(message = "Date of birth must be in the past")
 	    private LocalDate dateOfBirth;
 
@@ -59,7 +59,7 @@ public class StudentDetails {
 	    @Pattern(regexp = "^(Grade [1-9]|Grade 1[0-2])$", message = "Grade must be between 'Grade 1' and 'Grade 12'")
 	    private String grade;
 
-	    @NotBlank(message = "Enrollment date is required")
+	   /// @NotNull( "Enrollment date is required")
 	    @FutureOrPresent(message = "Enrollment date must be today or in the future")
 	    private LocalDate enrollmentDate;
 	    

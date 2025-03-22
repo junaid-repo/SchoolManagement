@@ -1,5 +1,10 @@
 package com.sma.students.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sma.students.entity.StudentDetails;
+import com.sma.students.service.StudentService;
 
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
@@ -18,22 +25,27 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ControllerStudent {
 	
+	@Autowired
+	StudentService serv;
+	
 	@GetMapping("/hello")
 	ResponseEntity<String> helloWorld(){
 		return ResponseEntity.status(HttpStatus.OK).body("Hello World");
 	}
 	
 	@PostMapping("/registerStudent")
-	ResponseEntity<String> registerStudent(@RequestBody StudentDetails request){
+	ResponseEntity<Map> registerStudent(@Valid @RequestBody StudentDetails request){
 		
-		String response=null;
+		String response=serv.saveStudentDetails(request);
+		Map<String, String> responseMap=new HashMap<>();
+		responseMap.put("admissionNumber", response);
 		
-		return ResponseEntity.status(HttpStatus.CREATED).body(response);
+		return ResponseEntity.status(HttpStatus.CREATED).body(responseMap);
 	}
 	@GetMapping("/getStudentDetails")
 	ResponseEntity<StudentDetails> getStudentDetails(@RequestParam String admitNumber){
 		
-		StudentDetails response=null;
+		StudentDetails response=serv.getStudentDetails(admitNumber);
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
