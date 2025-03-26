@@ -12,4 +12,7 @@ public interface StudentAttendanceDetailsRepository extends JpaRepository<Studen
 	@Query(value="select * from student_attendance_details std where std.student_attendance_id=?1", nativeQuery=true)
 	List<StudentAttendanceDetails> findbyStudentAttendanceId(Long id);
 
+	@Query(value="select * from student_attendance_details std where std.student_id=?1", nativeQuery=true)
+	List<StudentAttendanceDetails> findByStudentId(Integer studentId);
+
 }

@@ -32,6 +32,10 @@ public class StudentAttendance {
 
 	@Column(name = "teacher_id", nullable = false)
 	private Long teacher_id;
+	
+	@Column(name = "std", nullable = false)
+	private String std;
+
 
 	@Column(name = "date", nullable = false)
 	private LocalDate date;

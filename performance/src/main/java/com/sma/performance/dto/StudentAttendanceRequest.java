@@ -17,6 +17,8 @@ import lombok.NoArgsConstructor;
 public class StudentAttendanceRequest {
 
 	private Long teacher_id;
+	
+	private String std;
 
 	private LocalDate date;
 
