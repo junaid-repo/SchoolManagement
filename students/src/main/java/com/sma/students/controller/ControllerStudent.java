@@ -24,52 +24,50 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/sm/students")
 @Slf4j
 public class ControllerStudent {
-	
+
 	@Autowired
 	StudentService serv;
-	
+
 	@GetMapping("/hello")
-	ResponseEntity<String> helloWorld(){
+	ResponseEntity<String> helloWorld() {
 		return ResponseEntity.status(HttpStatus.OK).body("Hello World");
 	}
-	
+
 	@PostMapping("/registerStudent")
-	ResponseEntity<Map> registerStudent(@Valid @RequestBody StudentDetails request){
-		
-		String response=serv.saveStudentDetails(request);
-		Map<String, String> responseMap=new HashMap<>();
+	ResponseEntity<Map> registerStudent(@Valid @RequestBody StudentDetails request) {
+
+		String response = serv.saveStudentDetails(request);
+		Map<String, String> responseMap = new HashMap<>();
 		responseMap.put("admissionNumber", response);
-		
+
 		return ResponseEntity.status(HttpStatus.CREATED).body(responseMap);
 	}
+
 	@GetMapping("/getStudentDetails")
-	ResponseEntity<StudentDetails> getStudentDetails(@RequestParam String admitNumber){
-		
-		StudentDetails response=serv.getStudentDetails(admitNumber);
-		
+	ResponseEntity<StudentDetails> getStudentDetails(@RequestParam String admitNumber) {
+
+		StudentDetails response = serv.getStudentDetails(admitNumber);
+
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
+
 	@GetMapping("/updateStudentDetails")
-	ResponseEntity<StudentDetails> updateStudentDetails(@RequestBody StudentDetails studentDetails){
-		
-		StudentDetails response=null;
-		
+	ResponseEntity<StudentDetails> updateStudentDetails(@RequestBody StudentDetails studentDetails) {
+
+		StudentDetails response = null;
+
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
-	/*
-	 * @GetMapping("/getAttendence") ResponseEntity<List<Attendence>>
-	 * getAttendence(@RequestParam String admitNumber){
-	 * 
-	 * List<Attendence> response=null;
-	 * 
-	 * return ResponseEntity.status(HttpStatus.CREATED).body(response); }
-	 * 
-	 * @GetMapping("/getExamResult") ResponseEntity<List<ExamResult>>
-	 * getExamResult(@RequestParam String admitNumber){
-	 * 
-	 * List<ExamResult> response=null;
-	 * 
-	 * return ResponseEntity.status(HttpStatus.CREATED).body(response); }
-	 */
+	
+	@GetMapping("/getAttendance")
+	ResponseEntity<Map<String, Object>> getAttendence(@RequestParam String admitNumber) {
+
+		Map<String, Object> response = serv.getAttendanceDetailsForStudent(admitNumber);
+
+		return ResponseEntity.status(HttpStatus.CREATED).body(response);
+	}
+	  
+
+	 
 
 }

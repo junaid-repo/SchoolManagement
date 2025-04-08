@@ -1,6 +1,7 @@
 package com.sma.students.service;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,11 @@ public class StudentService {
 		StudentDetails stu = stuSaveRepo.getByAdmissionNumber(admitNumber);
 
 		return stu;
+	}
+
+	public Map<String, Object> getAttendanceDetailsForStudent(String admitNumber) {
+		
+		return ea.getAttendanceDetails(admitNumber);
 	}
 
 }

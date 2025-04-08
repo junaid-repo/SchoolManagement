@@ -3,7 +3,7 @@ server:
       
 spring:
      datasource:
-       url: jdbc:postgresql://localhost:5432/school_db
+       url: jdbc:postgresql://database-1.cr4ucs664vca.eu-north-1.rds.amazonaws.com:5432/school_db
        username: postgres
        password: postgres
      jpa:
@@ -19,6 +19,11 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
   instance:
     hostname: localhost
+    
+security:
+  authorization:
+    username: junaid36012
+    password: 123
 
 
 
