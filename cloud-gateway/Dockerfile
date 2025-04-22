@@ -1,7 +1,4 @@
-FROM eclipse-temurin:17-jdk-focal
-
-WORKDIR /opt
-ENV POR 8080
-EXPOSE 8080
-COPY target/*.jar /opt/app.jar
-ENTRYPOINT exec java $JAVA_OPTS -jar app.jar
+FROM openjdk:17
+ADD target/cloud-gateway-0.0.1-SNAPSHOT.jar cloud-gateway-1.0.0.jar
+EXPOSE 9090
+ENTRYPOINT [ "java", "-jar", "cloud-gateway-1.0.0.jar" ]

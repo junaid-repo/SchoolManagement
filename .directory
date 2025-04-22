@@ -2,7 +2,10 @@
 HeaderColumnWidths=632,174,76,154
 PreviewsShown=false
 SortRole=type
-Timestamp=2025,3,16,20,37,45.312
+Timestamp=2025,4,22,15,54,37.476
 Version=4
 ViewMode=1
 VisibleRoles=Details_text,Details_size,Details_type,Details_modificationtime,CustomizedDetails
+
+[Settings]
+HiddenFilesShown=true
