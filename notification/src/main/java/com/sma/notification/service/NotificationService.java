@@ -1,20 +1,41 @@
 package com.sma.notification.service;
 
+import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
 
 import com.sma.notification.dto.EmailRequest;
-import com.sma.notification.external.api.SendEmailApi;
 
 @Component
 public class NotificationService {
 
+
+
 	@Autowired
-	SendEmailApi sma;
+	private KafkaTemplate<String, EmailRequest> kafkaTemplate;
+
+	@Autowired
+	private NewTopic newTopic;
 
 	public String sendEmail(EmailRequest request) {
+		sendEmailWithKafka(request);
+		
+		return "success";
+	}
 
-		return sma.sendEmail(request);
+	private Boolean sendEmailWithKafka(EmailRequest request) {
+
+		Message<EmailRequest> message = MessageBuilder.withPayload(request)
+				.setHeader(KafkaHeaders.TOPIC, newTopic.name()).build();
+
+		kafkaTemplate.send(message);
+
+		return true;
+
 	}
 
 }

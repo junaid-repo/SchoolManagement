@@ -27,6 +27,10 @@ public class StudentControllerAdvice {
 	    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
 	}
 	
-	
+	//make sure to add this exception handler to handle all other exceptions
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	ResponseEntity<String> handleAllExceptions(Exception ex) {
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
+	}
 
 }
