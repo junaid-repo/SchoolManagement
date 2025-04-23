@@ -1,5 +1,5 @@
 server:
-   port: 9903
+   port: 9933
       
 spring:
      datasource:
@@ -12,11 +12,11 @@ spring:
        show-sql: true
      kafka:
        producer:
-         bootstrap-servers: localhost:9092
+         bootstrap-servers: junaid360.servicebus.windows.net:9092
          key-serializer: org.apache.kafka.common.serialization.StringSerializer
          value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
        topic:
-         name: email_topics
+         name: send-email
        
 eureka:
   client:
