@@ -1,0 +1,69 @@
+version: '3'
+services:
+  service-registry:
+    image: service-registry-1.0.0
+    container_name: service-registry-container
+    ports:
+      - "9761:9761"
+    networks:
+      - spring-boot-network
+
+  config-server:
+    image: config-server-1.0.0
+    depends_on:
+        - service-registry
+    container_name: config-server-container
+    ports:
+      - "8088:8088"
+    networks:
+      - spring-boot-network
+
+  cloud-gateway:
+    image: cloud-gateway-1.0.0
+    depends_on:
+        - service-registry
+    container_name: cloud-gateway-container
+    ports:
+      - "9390:9390"
+    networks:
+      - spring-boot-network
+
+  user:
+    image: user-1.0.0
+    container_name: user-container
+    depends_on:
+        - config-server
+    ports:
+      - "9927:9927"
+    networks:
+      - spring-boot-network
+    command: sh -c "sleep 10"
+
+  notification:
+    image: notification-1.0.0
+    container_name: notification-container
+    depends_on:
+        - config-server
+    ports:
+      - "9933:9933"
+    networks:
+      - spring-boot-network
+    command: sh -c "sleep 10"
+
+
+  students:
+    image: students-1.0.0
+    container_name: students-container
+    depends_on:
+        - config-server
+    ports:
+      - "9925:9925"
+    networks:
+      - spring-boot-network
+    command: sh -c "sleep 10"
+
+
+
+networks:
+  spring-boot-network:
+    driver: bridge
