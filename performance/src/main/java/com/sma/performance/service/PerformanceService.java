@@ -13,8 +13,10 @@ import com.sma.performance.dto.StudentAttendanceById;
 import com.sma.performance.dto.StudentAttendanceByIdResponse;
 import com.sma.performance.dto.StudentAttendanceDetailsRequest;
 import com.sma.performance.dto.StudentAttendanceRequest;
+import com.sma.performance.entity.StaffAttendanceRequest;
 import com.sma.performance.entity.StudentAttendance;
 import com.sma.performance.entity.StudentAttendanceDetails;
+import com.sma.performance.repos.StaffAttendanceRepository;
 import com.sma.performance.repos.StudentAttendanceDetailsRepository;
 import com.sma.performance.repos.StudentAttendanceRepository;
 
@@ -23,6 +25,9 @@ public class PerformanceService {
 
 	@Autowired
 	StudentAttendanceRepository stuAttenRepo;
+
+	@Autowired
+	StaffAttendanceRepository staAttenRepo;
 
 	@Autowired
 	StudentAttendanceDetailsRepository stuAttenDRepo;
@@ -48,7 +53,7 @@ public class PerformanceService {
 		return "saved";
 	}
 
-	@Cacheable(value="request")
+	@Cacheable(value = "request")
 	public StudentAttendanceRequest getStudentAttendence(LocalDate request) {
 		StudentAttendanceRequest response = null;
 		StudentAttendance stuAttn = stuAttenRepo.getByAttendanceDate(request);
@@ -68,8 +73,6 @@ public class PerformanceService {
 		return response;
 	}
 
-
-	
 	public StudentAttendanceByIdResponse getStudentAttendenceByStudentId(Integer studentId) {
 
 		// Fetch student attendance details from the repository
@@ -78,6 +81,36 @@ public class PerformanceService {
 		List<LocalDate> forPresent = stuAttnDetails.stream().filter(obj -> obj.getStatus()).map(obj -> obj.getDate())
 				.collect(Collectors.toList());
 		List<LocalDate> forAbsent = stuAttnDetails.stream().filter(obj -> obj.getStatus() == false)
+				.map(obj -> obj.getDate()).collect(Collectors.toList());
+
+		List<StudentAttendanceById> studentAttendanceById1 = List.of(
+				StudentAttendanceById.builder().status(true).date(forPresent).build(),
+				StudentAttendanceById.builder().status(false).date(forAbsent).build());
+
+		return StudentAttendanceByIdResponse.builder().studentAttendanceById(studentAttendanceById1).build();
+	}
+
+	public String logStaffAttendence(StaffAttendanceRequest request) {
+
+		List<StaffAttendanceRequest> attendList = staAttenRepo.getByStaffIdAndDate(request.getTeacherId(),
+				request.getDate());
+
+		if (attendList.size() > 0) {
+			return "attendence already added";
+		} else
+			staAttenRepo.save(request);
+
+		return "attendence added successfully";
+	}
+	
+	public StudentAttendanceByIdResponse getStaffAttendenceByStaffId(Integer staffId) {
+
+		// Fetch student attendance details from the repository
+		List<StaffAttendanceRequest> staAttnDetails = staAttenRepo.findByStaffId(staffId);
+
+		List<LocalDate> forPresent = staAttnDetails.stream().filter(obj -> obj.getStatus()).map(obj -> obj.getDate())
+				.collect(Collectors.toList());
+		List<LocalDate> forAbsent = staAttnDetails.stream().filter(obj -> obj.getStatus() == false)
 				.map(obj -> obj.getDate()).collect(Collectors.toList());
 
 		List<StudentAttendanceById> studentAttendanceById1 = List.of(

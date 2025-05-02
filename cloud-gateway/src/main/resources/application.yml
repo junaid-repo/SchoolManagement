@@ -43,10 +43,12 @@ spring:
           filters:
             - AuthenticationFilter         
             
-        - id: TEACHER-SERVICE
-          uri: lb://TEACHER-SERVICE
+        - id: STAFF-SERVICE
+          uri: lb://STAFF-SERVICE
           predicates:
-            - Path=/sm/teacher/**
+            - Path=/sm/staff/**
+          filters:
+            - AuthenticationFilter             
 
         - id: USER-SERVICE
           uri: lb://USER-SERVICE

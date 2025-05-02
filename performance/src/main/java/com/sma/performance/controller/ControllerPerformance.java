@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sma.performance.dto.StudentAttendanceByIdResponse;
 import com.sma.performance.dto.StudentAttendanceRequest;
+import com.sma.performance.entity.StaffAttendanceRequest;
 import com.sma.performance.service.PerformanceService;
 
 @RestController
@@ -27,6 +28,14 @@ public class ControllerPerformance {
 	ResponseEntity<String> logStudentAttendence(@RequestBody StudentAttendanceRequest request) {
 
 		String response = serv.logStudentAttendence(request);
+
+		return ResponseEntity.status(HttpStatus.CREATED).body(response);
+
+	}
+	@PostMapping("/log/attendence/staff")
+	ResponseEntity<String> logStaffAttendence(@RequestBody StaffAttendanceRequest request) {
+
+		String response = serv.logStaffAttendence(request);
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 
@@ -45,6 +54,14 @@ public class ControllerPerformance {
 	ResponseEntity<StudentAttendanceByIdResponse> getStudentAttendenceByStudentId(@RequestParam Integer request) {
 
 		StudentAttendanceByIdResponse response = serv.getStudentAttendenceByStudentId(request);
+
+		return ResponseEntity.status(HttpStatus.CREATED).body(response);
+
+	}
+	@GetMapping("/get/attendence/staff/byStaffId")
+	ResponseEntity<StudentAttendanceByIdResponse> getStudentAttendenceByStaffId(@RequestParam Integer id) {
+
+		StudentAttendanceByIdResponse response = serv.getStaffAttendenceByStaffId(id);
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 
