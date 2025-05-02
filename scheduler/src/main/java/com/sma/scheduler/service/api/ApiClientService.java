@@ -68,12 +68,14 @@ public class ApiClientService {
 						logRequest.put("status", false);
 						logRequest.put("inTime", null);
 						logRequest.put("outTime", null);
-						logRequest.put("date", LocalDate.now());
+						logRequest.put("date", LocalDate.now().plusDays(4));
 						
 					}
 				}
-				if(logRequest.size()!=0)
+				if(logRequest.size()!=0) {
 					saveSAttendence(logRequest);
+					sendEmailReminder(logRequest);
+				}
 
 			});
 			
@@ -83,6 +85,23 @@ public class ApiClientService {
 		
 		
 		System.out.println(response);
+		
+	}
+
+	private void sendEmailReminder(Map<String, Object> logRequest) {
+		
+		   Map<String, String> detailsMap=getStaffDetails((Integer) logRequest.get("teacherId"));
+		   
+		   System.out.println("The staffDetails are "+ detailsMap);
+		
+		
+	}
+
+	private Map<String, String> getStaffDetails(Integer id) {
+		   
+		return   webClient.get().uri("sm/staff/details/get/"+String.valueOf(id))
+			.header("Authorization", "Bearer " + generateToken()) // Adding Bearer Token
+			.retrieve().bodyToMono(Map.class).block();
 		
 	}
 

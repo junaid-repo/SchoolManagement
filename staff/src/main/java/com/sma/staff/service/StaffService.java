@@ -30,4 +30,9 @@ public class StaffService {
 		return ssRepo.findAllStaffIds();
 	}
 
+	public StaffDetails getStaffDetails(String id) {
+		// TODO Auto-generated method stub
+		return ssRepo.findById(Integer.parseInt(id)).get();
+	}
+
 }
