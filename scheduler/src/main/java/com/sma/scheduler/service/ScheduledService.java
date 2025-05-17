@@ -20,7 +20,7 @@ public class ScheduledService {
 		List<Integer> staffIds = apiClient.getAllStaffId();
 		
 		staffIds.stream().forEach(id->{
-			if(id==5)
+			if(id==775)
 				apiClient.getAndSaveAttendence(id);
 		});
 		

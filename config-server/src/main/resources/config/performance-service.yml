@@ -27,6 +27,11 @@ resilience4j:
             max-attempts: 5
             wait-duration: 5s
          
+springdoc:
+  api-docs:
+    path: /sm/performance/v3/api-docs
+  swagger-ui:
+    path: /sm/performance/swagger-ui.html
          
 
 

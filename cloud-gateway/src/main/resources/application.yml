@@ -55,6 +55,9 @@ spring:
           predicates:
             - Path=/auth/**
 
+
+
+
 eureka:
   client:
     fetch-registry: true
